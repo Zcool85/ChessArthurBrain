@@ -1,3 +1,7 @@
+## MacOS files
+.DS_store
+
+
 ## CMake .gitignore
 
 CMakeLists.txt.user
@@ -46,3 +50,8 @@ _deps
 *.exe
 *.out
 *.app
+
+## Binairies
+
+build/
+
