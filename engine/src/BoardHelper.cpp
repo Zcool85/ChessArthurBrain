@@ -81,19 +81,19 @@ void BoardHelper::print() {
     // Set pieces position for each square
     for (auto square = SQ_A1; square < SQUARE_NB; square++)
         for (auto piece = W_PAWN; piece < PIECE_NB; piece++)
-            if (_board._pieces_bb[piece] & (1ULL << square)) pieces[square] = display[piece];
+            if (_board._pieces_bb[piece][square]) pieces[square] = display[piece];
 
     // Set empty squares
     for (auto square = SQ_A1; square < SQUARE_NB; square++) {
         if (pieces[square].empty()) {
             if (_showSquare == ShowSquere::DARK) {
-                if (_board._dark_squares & (1ULL << square))
+                if (_board._dark_squares[square])
                     pieces[square] = "▓";
                 else
                     pieces[square] = "░";
             }
             if (_showSquare == ShowSquere::LIGHT) {
-                if (_board._dark_squares & (1ULL << square))
+                if (_board._dark_squares[square])
                     pieces[square] = "░";
                 else
                     pieces[square] = " ";
