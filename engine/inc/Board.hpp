@@ -14,9 +14,11 @@ class BoardHelper;
 class Board {
     public:
         Board();
-        void init();
+        void init() noexcept;
         // TODO void load(string& fen);
     private:
+        void updateWhiteAllBitdoard() noexcept;
+        void updateBlackAllBitdoard() noexcept;
         std::unordered_map<Piece, Bitboard> _pieces_bb;
         Bitboard _dark_squares;
         friend class BoardHelper;

@@ -1,4 +1,5 @@
 #include "BoardHelper.hpp"
+#include "BitboardHelper.hpp"
 
 #include <iomanip>
 #include <string>
@@ -108,25 +109,25 @@ void BoardHelper::dump() {
 }
 
 void BoardHelper::print() {
-    unordered_map<Piece, string> const display = _showAscii ? glyph_ascii_pieces : glyph_unicode_pieces;
-    string pieces[SQUARE_NB];
+    auto const display = _showAscii ? glyph_ascii_pieces : glyph_unicode_pieces;
+    unordered_map<Square, string> pieces;
     
-    // Set pieces position for each square
-    for (auto square = SQ_A1; square < SQUARE_NB; square++)
-        for (const auto& bb : _board._pieces_bb)
-            if (display.contains(bb.first) && bb.second[square]) pieces[square] = display.at(bb.first);
+    // Set pieces positions for each square
+    for (const auto& square : AllSquares)
+        for (const auto& [piece, bitboard] : _board._pieces_bb)
+            if (display.contains(piece) && isset(bitboard, square)) pieces[square] = display.at(piece);
 
     // Set empty squares
-    for (auto square = SQ_A1; square < SQUARE_NB; square++) {
+    for (const auto& square : AllSquares) {
         if (pieces[square].empty()) {
             if (_showSquare == ShowSquere::DARK) {
-                if (_board._dark_squares[square])
+                if (isset(_board._dark_squares, square))
                     pieces[square] = "▓";
                 else
                     pieces[square] = "░";
             }
             if (_showSquare == ShowSquere::LIGHT) {
-                if (_board._dark_squares[square])
+                if (isset(_board._dark_squares, square))
                     pieces[square] = "░";
                 else
                     pieces[square] = " ";

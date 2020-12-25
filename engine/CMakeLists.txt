@@ -18,6 +18,7 @@ set(HEADERS
         inc/BoardHelper.hpp
         inc/DebugEngineCLI.hpp
         inc/Unused.hpp
+        inc/BitboardHelper.hpp
     )
 
 add_executable(ChessArthurEngine ${SRCS} ${HEADERS})
