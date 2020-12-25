@@ -1,22 +1,61 @@
 #include "BoardHelper.hpp"
 
-#include <vector>
+#include <iomanip>
 #include <string>
 #include <iostream>
 #include <algorithm>
 #include <bitset>
+#include <unordered_map>
 using namespace std;
 
-const vector<string> glyph_ascii_pieces = {
-    // Same index as enum Piece
-    "P", "N", "B", "R", "Q", "K",   // white
-    "p", "n", "b", "r", "q", "k"    // black
+ostream& operator<<(ostream &o, Piece piece) {
+    switch(piece) {
+        case Piece::WhiteAll:    return o << "AW";
+        case Piece::WhitePawn:   return o << "P";
+        case Piece::WhiteKnight: return o << "N";
+        case Piece::WhiteBishop: return o << "B";
+        case Piece::WhiteRook:   return o << "R";
+        case Piece::WhiteQueen:  return o << "Q";
+        case Piece::WhiteKing:   return o << "K";
+        case Piece::BlackAll:    return o << "AB";
+        case Piece::BlackPawn:   return o << "p";
+        case Piece::BlackKnight: return o << "n";
+        case Piece::BlackBishop: return o << "b";
+        case Piece::BlackRook:   return o << "r";
+        case Piece::BlackQueen:  return o << "q";
+        case Piece::BlackKing:   return o << "k";
+        default: return o << "(invalid value)";
+    }
+}
+
+static unordered_map<Piece, string> const glyph_ascii_pieces = {
+    {Piece::WhitePawn,   "P"},
+    {Piece::WhiteKnight, "N"},
+    {Piece::WhiteBishop, "B"},
+    {Piece::WhiteRook,   "R"},
+    {Piece::WhiteQueen,  "Q"},
+    {Piece::WhiteKing,   "K"},
+    {Piece::BlackPawn,   "p"},
+    {Piece::BlackKnight, "n"},
+    {Piece::BlackBishop, "b"},
+    {Piece::BlackRook,   "r"},
+    {Piece::BlackQueen,  "q"},
+    {Piece::BlackKing,   "k"},
 };
 
-const vector<string> glyph_unicode_pieces = {
-    // Same index as enum Piece
-    "♟", "♞", "♝", "♜", "♛", "♚", // white
-    "♙", "♘", "♗", "♖", "♕", "♔"  // black
+static unordered_map<Piece, string> const glyph_unicode_pieces = {
+    {Piece::WhitePawn,   "♟"},
+    {Piece::WhiteKnight, "♞"},
+    {Piece::WhiteBishop, "♝"},
+    {Piece::WhiteRook,   "♜"},
+    {Piece::WhiteQueen,  "♛"},
+    {Piece::WhiteKing,   "♚"},
+    {Piece::BlackPawn,   "♙"},
+    {Piece::BlackKnight, "♘"},
+    {Piece::BlackBishop, "♗"},
+    {Piece::BlackRook,   "♖"},
+    {Piece::BlackQueen,  "♕"},
+    {Piece::BlackKing,   "♔"},
 };
 
 BoardHelper::BoardHelper(Board& board)
@@ -64,24 +103,18 @@ void BoardHelper::setOptions(istringstream& is) {
 }
 
 void BoardHelper::dump() {
-    for (auto piece = W_PAWN; piece < PIECE_NB; piece++) {
-        cout << "Piece " << piece << ": 0b" << bitset<64>(_board._pieces_bb[piece]) << endl;
-    }
+    for (const auto& bb : _board._pieces_bb)
+        cout << "Piece " << setw(2) << bb.first << ": 0b" << bb.second << endl;
 }
 
 void BoardHelper::print() {
-    vector<string> display;
+    unordered_map<Piece, string> const display = _showAscii ? glyph_ascii_pieces : glyph_unicode_pieces;
     string pieces[SQUARE_NB];
-
-    if (_showAscii)
-        copy(glyph_ascii_pieces.begin(), glyph_ascii_pieces.end(), back_inserter(display));
-    else
-        copy(glyph_unicode_pieces.begin(), glyph_unicode_pieces.end(), back_inserter(display));
     
     // Set pieces position for each square
     for (auto square = SQ_A1; square < SQUARE_NB; square++)
-        for (auto piece = W_PAWN; piece < PIECE_NB; piece++)
-            if (_board._pieces_bb[piece][square]) pieces[square] = display[piece];
+        for (const auto& bb : _board._pieces_bb)
+            if (display.contains(bb.first) && bb.second[square]) pieces[square] = display.at(bb.first);
 
     // Set empty squares
     for (auto square = SQ_A1; square < SQUARE_NB; square++) {

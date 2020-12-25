@@ -6,26 +6,11 @@
 
 typedef std::bitset<64> Bitboard;
 
-enum Color : int {
-    WHITE, BLACK,
-    COLOR_NB = 2
+enum class Piece {
+    WhiteAll, BlackAll,
+    WhitePawn, WhiteKnight, WhiteBishop, WhiteRook, WhiteQueen, WhiteKing,
+    BlackPawn, BlackKnight, BlackBishop, BlackRook, BlackQueen, BlackKing,
 };
-
-enum PieceType : int {
-    PAWN, KNIGHT, BISHOP, ROOK, QUEEN, KING,
-    PIECE_TYPE_NB = 6
-};
-
-enum Piece : int {
-    W_PAWN = PAWN,                 W_KNIGHT, W_BISHOP, W_ROOK, W_QUEEN, W_KING,
-    B_PAWN = PAWN + PIECE_TYPE_NB, B_KNIGHT, B_BISHOP, B_ROOK, B_QUEEN, B_KING,
-    PIECE_NB = 12
-};
-
-inline Piece& operator++(Piece& piece, int) {
-	piece = static_cast<Piece>(static_cast<int>(piece) + 1);
-	return piece;
-}
 
 enum Square : int {
     SQ_A1, SQ_B1, SQ_C1, SQ_D1, SQ_E1, SQ_F1, SQ_G1, SQ_H1,

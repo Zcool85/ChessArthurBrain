@@ -3,6 +3,9 @@
         "iosfwd": "cpp",
         "typeinfo": "cpp",
         "vector": "cpp",
-        "iostream": "cpp"
-    }
+        "iostream": "cpp",
+        "__hash_table": "cpp",
+        "unordered_map": "cpp"
+    },
+    "C_Cpp.default.cppStandard": "gnu++20"
 }

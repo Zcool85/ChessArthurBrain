@@ -4,6 +4,7 @@
 #include "Types.hpp"
 
 #include <string>
+#include <unordered_map>
 
 class BoardHelper;
 
@@ -14,11 +15,9 @@ class Board {
     public:
         Board();
         void init();
-        //void load(string& fen);
+        // TODO void load(string& fen);
     private:
-        void _init_white();
-        void _init_black();
-        Bitboard _pieces_bb[PIECE_NB];
+        std::unordered_map<Piece, Bitboard> _pieces_bb;
         Bitboard _dark_squares;
         friend class BoardHelper;
 };
