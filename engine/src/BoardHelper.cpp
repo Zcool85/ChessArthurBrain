@@ -30,6 +30,10 @@ ostream& operator<<(ostream &o, Piece piece) {
     }
 }
 
+ostream& operator<<(ostream &o, Rank rank) {
+    return o << static_cast<int>(rank) + 1;
+}
+
 static unordered_map<Piece, string> const glyph_ascii_pieces = {
     {Piece::WhitePawn,   "P"},
     {Piece::WhiteKnight, "N"},
@@ -141,7 +145,6 @@ void BoardHelper::print() {
     if (_reverse) {
         cout << "╔═════════════════╗╮" << endl;
 
-        auto rank_index = 0;
         for (const auto& rank : AllRanks)
         {
             cout << "║ ";
@@ -150,7 +153,7 @@ void BoardHelper::print() {
                      [&pieces, &rank](const auto & file) {
                         cout << pieces[make_square(file, rank)] << " ";
                      });
-            cout << "║" << ++rank_index << endl;
+            cout << "║" << rank << endl;
         }
         
         cout << "╚═════════════════╝┊" << endl;
@@ -159,14 +162,13 @@ void BoardHelper::print() {
     else {
         cout << "╔═════════════════╗╮" << endl;
 
-        auto rank_index = 9;
         for_each(AllRanks.rbegin(), 
                  AllRanks.rend(),
-                 [&pieces, &rank_index](const auto & rank) {
+                 [&pieces](const auto & rank) {
                     cout << "║ ";
                     for (const auto& file : AllFiles)
                         cout << pieces[make_square(file, rank)] << " ";
-                    cout << "║" << --rank_index << endl;
+                    cout << "║" << rank << endl;
                 });
         
         cout << "╚═════════════════╝┊" << endl;
