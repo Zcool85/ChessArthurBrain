@@ -3,6 +3,7 @@
 
 #include <bitset>
 #include <cstdint>
+#include <array>
 
 typedef std::bitset<64> Bitboard;
 
@@ -23,7 +24,7 @@ enum class Square : int {
     SQ_A8, SQ_B8, SQ_C8, SQ_D8, SQ_E8, SQ_F8, SQ_G8, SQ_H8,
 };
 
-const Square AllSquares[] = {
+const std::array<Square,64> AllSquares = {
     Square::SQ_A1, Square::SQ_B1, Square::SQ_C1, Square::SQ_D1, Square::SQ_E1, Square::SQ_F1, Square::SQ_G1, Square::SQ_H1,
     Square::SQ_A2, Square::SQ_B2, Square::SQ_C2, Square::SQ_D2, Square::SQ_E2, Square::SQ_F2, Square::SQ_G2, Square::SQ_H2,
     Square::SQ_A3, Square::SQ_B3, Square::SQ_C3, Square::SQ_D3, Square::SQ_E3, Square::SQ_F3, Square::SQ_G3, Square::SQ_H3,
@@ -31,7 +32,23 @@ const Square AllSquares[] = {
     Square::SQ_A5, Square::SQ_B5, Square::SQ_C5, Square::SQ_D5, Square::SQ_E5, Square::SQ_F5, Square::SQ_G5, Square::SQ_H5,
     Square::SQ_A6, Square::SQ_B6, Square::SQ_C6, Square::SQ_D6, Square::SQ_E6, Square::SQ_F6, Square::SQ_G6, Square::SQ_H6,
     Square::SQ_A7, Square::SQ_B7, Square::SQ_C7, Square::SQ_D7, Square::SQ_E7, Square::SQ_F7, Square::SQ_G7, Square::SQ_H7,
-    Square::SQ_A8, Square::SQ_B8, Square::SQ_C8, Square::SQ_D8, Square::SQ_E8, Square::SQ_F8, Square::SQ_G8, Square::SQ_H8
+    Square::SQ_A8, Square::SQ_B8, Square::SQ_C8, Square::SQ_D8, Square::SQ_E8, Square::SQ_F8, Square::SQ_G8, Square::SQ_H8,
+};
+
+enum class File {
+    FILE_A, FILE_B, FILE_C, FILE_D, FILE_E, FILE_F, FILE_G, FILE_H,
+};
+
+const std::array<File, 8> AllFiles = {
+    File::FILE_A, File::FILE_B, File::FILE_C, File::FILE_D, File::FILE_E, File::FILE_F, File::FILE_G, File::FILE_H,
+};
+
+enum class Rank : int {
+    RANK_1, RANK_2, RANK_3, RANK_4, RANK_5, RANK_6, RANK_7, RANK_8
+};
+
+const std::array<Rank, 8> AllRanks = {
+    Rank::RANK_1, Rank::RANK_2, Rank::RANK_3, Rank::RANK_4, Rank::RANK_5, Rank::RANK_6, Rank::RANK_7, Rank::RANK_8,
 };
 
 enum Direction : int {
@@ -45,27 +62,5 @@ enum Direction : int {
     SOUTH_WEST = SOUTH + WEST,
     NORTH_WEST = NORTH + WEST
 };
-
-enum File : int {
-    FILE_A, FILE_B, FILE_C, FILE_D, FILE_E, FILE_F, FILE_G, FILE_H, FILE_NB
-};
-
-inline File& operator++(File& file, int) {
-	file = static_cast<File>(static_cast<int>(file) + 1);
-	return file;
-}
-
-enum Rank : int {
-    RANK_1, RANK_2, RANK_3, RANK_4, RANK_5, RANK_6, RANK_7, RANK_8, RANK_NB
-};
-
-inline Rank& operator++(Rank& rank, int) {
-	rank = static_cast<Rank>(static_cast<int>(rank) + 1);
-	return rank;
-}
-
-constexpr Square make_square(File file, Rank rank) {
-    return Square((rank << 3) + file);
-}
 
 #endif // _TYPES_HPP_

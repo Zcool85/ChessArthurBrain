@@ -28,8 +28,8 @@ void Board::updateBlackAllBitdoard() noexcept {
 }
 
 void Board::init() noexcept {
-    for (auto file = FILE_A; file < FILE_NB; file++)
-        _pieces_bb[Piece::WhitePawn] |= 1ULL << static_cast<int>(make_square(file, RANK_2));    // TODO to review
+    for (const auto& file : AllFiles)
+        setbit(_pieces_bb[Piece::WhitePawn], make_square(file, Rank::RANK_2));
     setbit(_pieces_bb[Piece::WhiteRook],   Square::SQ_A1);
     setbit(_pieces_bb[Piece::WhiteKnight], Square::SQ_B1);
     setbit(_pieces_bb[Piece::WhiteBishop], Square::SQ_C1);
@@ -41,8 +41,8 @@ void Board::init() noexcept {
 
     updateWhiteAllBitdoard();
 
-    for (auto file = FILE_A; file < FILE_NB; file++)
-        _pieces_bb[Piece::BlackPawn] |= 1ULL << static_cast<int>(make_square(file, RANK_7));    // TOTO to review
+    for (const auto& file : AllFiles)
+        setbit(_pieces_bb[Piece::BlackPawn], make_square(file, Rank::RANK_7));
     setbit(_pieces_bb[Piece::BlackRook],   Square::SQ_A8);
     setbit(_pieces_bb[Piece::BlackKnight], Square::SQ_B8);
     setbit(_pieces_bb[Piece::BlackBishop], Square::SQ_C8);

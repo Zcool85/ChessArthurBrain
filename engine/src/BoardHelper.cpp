@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <bitset>
 #include <unordered_map>
+#include <iterator>
 using namespace std;
 
 ostream& operator<<(ostream &o, Piece piece) {
@@ -140,12 +141,16 @@ void BoardHelper::print() {
     if (_reverse) {
         cout << "╔═════════════════╗╮" << endl;
 
-        for (auto rank = 0; rank < 8; rank++)
+        auto rank_index = 0;
+        for (const auto& rank : AllRanks)
         {
             cout << "║ ";
-            for (auto file = FILE_NB - 1; file >= FILE_A; file--)
-                cout << pieces[make_square(static_cast<File>(file), static_cast<Rank>(rank))] << " ";
-            cout << "║" << rank + 1 << endl;
+            for_each(AllFiles.rbegin(), 
+                     AllFiles.rend(),
+                     [&pieces, &rank](const auto & file) {
+                        cout << pieces[make_square(file, rank)] << " ";
+                     });
+            cout << "║" << ++rank_index << endl;
         }
         
         cout << "╚═════════════════╝┊" << endl;
@@ -154,13 +159,15 @@ void BoardHelper::print() {
     else {
         cout << "╔═════════════════╗╮" << endl;
 
-        for (auto rank = 7; rank >= 0; rank--)
-        {
-            cout << "║ ";
-            for (auto file = FILE_A; file < FILE_NB; file++)
-                cout << pieces[make_square(file, static_cast<Rank>(rank))] << " ";
-            cout << "║" << rank + 1 << endl;
-        }
+        auto rank_index = 9;
+        for_each(AllRanks.rbegin(), 
+                 AllRanks.rend(),
+                 [&pieces, &rank_index](const auto & rank) {
+                    cout << "║ ";
+                    for (const auto& file : AllFiles)
+                        cout << pieces[make_square(file, rank)] << " ";
+                    cout << "║" << --rank_index << endl;
+                });
         
         cout << "╚═════════════════╝┊" << endl;
         cout << "╰┈a┈b┈c┈d┈e┈f┈g┈h┈┈╯" << endl;
