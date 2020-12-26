@@ -18,7 +18,7 @@ endif()
 # External packages
 #########################################################
 
-# Sampe : find_package(SDL2 REQUIRED)
+find_package(Boost COMPONENTS system REQUIRED)
 
 #########################################################
 # Compiler default options

@@ -8,6 +8,7 @@
 #include <bitset>
 #include <unordered_map>
 #include <iterator>
+#include <boost/range/adaptor/reversed.hpp>
 using namespace std;
 
 ostream& operator<<(ostream &o, Piece piece) {
@@ -120,7 +121,8 @@ void BoardHelper::print() {
     // Set pieces positions for each square
     for (const auto& square : AllSquares)
         for (const auto& [piece, bitboard] : _board._pieces_bb)
-            if (display.contains(piece) && isset(bitboard, square)) pieces[square] = display.at(piece);
+            if (display.contains(piece) && isset(bitboard, square))
+                pieces[square] = display.at(piece);
 
     // Set empty squares
     for (const auto& square : AllSquares) {
@@ -137,7 +139,8 @@ void BoardHelper::print() {
                 else
                     pieces[square] = " ";
             }
-            if (_showSquare == ShowSquere::OFF) pieces[square] = " ";
+            if (_showSquare == ShowSquere::OFF)
+                pieces[square] = " ";
         }
     }
 
@@ -148,11 +151,9 @@ void BoardHelper::print() {
         for (const auto& rank : AllRanks)
         {
             cout << "║ ";
-            for_each(AllFiles.rbegin(), 
-                     AllFiles.rend(),
-                     [&pieces, &rank](const auto & file) {
-                        cout << pieces[make_square(file, rank)] << " ";
-                     });
+            for (const auto& file : boost::adaptors::reverse(AllFiles)) {
+                cout << pieces[make_square(file, rank)] << " ";
+            }
             cout << "║" << rank << endl;
         }
         
@@ -162,14 +163,12 @@ void BoardHelper::print() {
     else {
         cout << "╔═════════════════╗╮" << endl;
 
-        for_each(AllRanks.rbegin(), 
-                 AllRanks.rend(),
-                 [&pieces](const auto & rank) {
-                    cout << "║ ";
-                    for (const auto& file : AllFiles)
-                        cout << pieces[make_square(file, rank)] << " ";
-                    cout << "║" << rank << endl;
-                });
+        for (const auto& rank : boost::adaptors::reverse(AllRanks)) {
+            cout << "║ ";
+            for (const auto& file : AllFiles)
+                cout << pieces[make_square(file, rank)] << " ";
+            cout << "║" << rank << endl;
+        }
         
         cout << "╚═════════════════╝┊" << endl;
         cout << "╰┈a┈b┈c┈d┈e┈f┈g┈h┈┈╯" << endl;

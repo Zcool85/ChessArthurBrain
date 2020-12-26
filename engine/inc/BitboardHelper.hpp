@@ -4,15 +4,15 @@
 #include "Types.hpp"
 
 constexpr void setbit(Bitboard& bitboard, const Square& square) noexcept {
-    bitboard |= 1ULL << static_cast<int>(square);
+    bitboard.set(static_cast<int>(square));
 }
 
 constexpr void unsetbit(Bitboard& bitboard, const Square& square) noexcept {
-    bitboard &= ~(1ULL << static_cast<int>(square));
+    bitboard.reset(static_cast<int>(square));
 }
 
 constexpr bool isset(const Bitboard& bitboard, const Square& square) noexcept {
-    return bitboard[static_cast<int>(square)];
+    return bitboard.test(static_cast<int>(square));
 }
 
 constexpr Square make_square(const File& file, const Rank& rank) noexcept {

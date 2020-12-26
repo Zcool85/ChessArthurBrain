@@ -22,3 +22,8 @@ set(HEADERS
     )
 
 add_executable(ChessArthurEngine ${SRCS} ${HEADERS})
+
+target_link_libraries(ChessArthurEngine
+                           PRIVATE
+                                Boost::system
+                      )
