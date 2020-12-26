@@ -3,14 +3,14 @@
 
 #include <cstddef>
 
-Board::Board()
-    : _dark_squares(0xAA55AA55AA55AA55ULL),
-      _queen_side  (0x0F0F0F0F0F0F0F0FULL),
-      _king_side   (0xF0F0F0F0F0F0F0F0ULL),
-      _center_files(0x3C3C3C3C3C3C3C3CULL),
-      _center      (0x0000001818000000ULL),
-      _flanks      (0x8181818181818181ULL) {
-    // First add bitboards
+Bitboard const MASK_DARK_SQUARES = 0xAA55AA55AA55AA55ULL;
+Bitboard const MASK_QUEEN_SIDE   = 0x0F0F0F0F0F0F0F0FULL;
+Bitboard const MASK_KING_SIDE    = 0xF0F0F0F0F0F0F0F0ULL;
+Bitboard const MASK_CENTER_FILES = 0x3C3C3C3C3C3C3C3CULL;
+Bitboard const MASK_CENTER       = 0x0000001818000000ULL;
+Bitboard const MASK_FLANKS       = 0x8181818181818181ULL;
+
+Board::Board() {
     for (const auto& piece : AllPieces)
         _pieces_bb[piece].reset();
 

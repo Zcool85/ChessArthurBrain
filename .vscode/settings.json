@@ -5,7 +5,8 @@
         "vector": "cpp",
         "iostream": "cpp",
         "__hash_table": "cpp",
-        "unordered_map": "cpp"
+        "unordered_map": "cpp",
+        "cstddef": "cpp"
     },
     "C_Cpp.default.cppStandard": "gnu++20"
 }

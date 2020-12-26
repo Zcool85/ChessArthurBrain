@@ -116,12 +116,12 @@ void BoardHelper::setOptions(istringstream& is) {
 void BoardHelper::dump() {
     for (const auto& bb : _board._pieces_bb)
         cout << "Piece " << setw(2) << bb.first << ": 0b" << bb.second << endl;
-    cout << "Dark squares : " << _board._dark_squares << endl;
-    cout << "Queen side   : " << _board._queen_side << endl;
-    cout << "King side    : " << _board._king_side << endl;
-    cout << "Center files : " << _board._center_files << endl;
-    cout << "Center       : " << _board._center << endl;
-    cout << "Flanks       : " << _board._flanks << endl;
+    cout << "Dark squares : " << MASK_DARK_SQUARES << endl;
+    cout << "Queen side   : " << MASK_QUEEN_SIDE << endl;
+    cout << "King side    : " << MASK_KING_SIDE << endl;
+    cout << "Center files : " << MASK_CENTER_FILES << endl;
+    cout << "Center       : " << MASK_CENTER << endl;
+    cout << "Flanks       : " << MASK_FLANKS << endl;
 }
 
 static void pretty_print_bb(const Bitboard& botboard) {
@@ -144,17 +144,17 @@ void BoardHelper::dump_pretty_print() {
         pretty_print_bb(bb.second);
     }
     cout << "Dark squares : " << endl;
-    pretty_print_bb(_board._dark_squares);
+    pretty_print_bb(MASK_DARK_SQUARES);
     cout << "Queen side   : " << endl;
-    pretty_print_bb(_board._queen_side);
+    pretty_print_bb(MASK_QUEEN_SIDE);
     cout << "King side    : " << endl;
-    pretty_print_bb(_board._king_side);
+    pretty_print_bb(MASK_KING_SIDE);
     cout << "Center files : " << endl;
-    pretty_print_bb(_board._center_files);
+    pretty_print_bb(MASK_CENTER_FILES);
     cout << "Center       : " << endl;
-    pretty_print_bb(_board._center);
+    pretty_print_bb(MASK_CENTER);
     cout << "Flanks       : " << endl;
-    pretty_print_bb(_board._flanks);
+    pretty_print_bb(MASK_FLANKS);
 }
 
 void BoardHelper::print() {
@@ -171,13 +171,13 @@ void BoardHelper::print() {
     for (const auto& square : AllSquares) {
         if (pieces[square].empty()) {
             if (_showSquare == ShowSquere::DARK) {
-                if (isset(_board._dark_squares, square))
+                if (isset(MASK_DARK_SQUARES, square))
                     pieces[square] = "▓";
                 else
                     pieces[square] = "░";
             }
             if (_showSquare == ShowSquere::LIGHT) {
-                if (isset(_board._dark_squares, square))
+                if (isset(MASK_DARK_SQUARES, square))
                     pieces[square] = "░";
                 else
                     pieces[square] = " ";

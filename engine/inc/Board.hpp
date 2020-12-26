@@ -5,6 +5,13 @@
 
 #include <unordered_map>
 
+extern Bitboard const MASK_DARK_SQUARES;
+extern Bitboard const MASK_QUEEN_SIDE;
+extern Bitboard const MASK_KING_SIDE;
+extern Bitboard const MASK_CENTER_FILES;
+extern Bitboard const MASK_CENTER;
+extern Bitboard const MASK_FLANKS;
+
 class BoardHelper;
 
 /*
@@ -15,24 +22,17 @@ class Board {
         Board();
         void init() noexcept;
         void reset() noexcept;
-        // TODO void load(string& fen);
     private:
         void updateWhiteAllBitdoard() noexcept;
         void updateBlackAllBitdoard() noexcept;
         std::unordered_map<Piece, Bitboard> _pieces_bb;
-        const Bitboard _dark_squares;
-        const Bitboard _queen_side;
-        const Bitboard _king_side;
-        const Bitboard _center_files;
-        const Bitboard _center;
-        const Bitboard _flanks;
-        // attacks of rook
-        // attacks of knight
-        // attacks of beshop
-        // attacks of queen
-        // attacks of king
-        // attacks of white pawn
-        // attacks of black pawn
+        // static std::unordered_map<Square, Bitboard> const _attacks_rook_mask;
+        // static std::unordered_map<Square, Bitboard> const _attacks_knight_mask;
+        // static std::unordered_map<Square, Bitboard> const _attacks_beshop_mask;
+        // static std::unordered_map<Square, Bitboard> const _attacks_queen_mask;
+        // static std::unordered_map<Square, Bitboard> const _attacks_king_mask;
+        // static std::unordered_map<Square, Bitboard> const _attacks_white_pawn_mask;
+        // static std::unordered_map<Square, Bitboard> const _attacks_black_pawn_mask;
 
         friend class BoardHelper;
 };
