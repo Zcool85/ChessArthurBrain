@@ -75,6 +75,10 @@ void BoardHelper::init() {
     _board.init();
 }
 
+void BoardHelper::reset() {
+    _board.reset();
+}
+
 void BoardHelper::setOptions(istringstream& is) {
     // set ascii on/off
     // set square light/dark/off
@@ -112,6 +116,45 @@ void BoardHelper::setOptions(istringstream& is) {
 void BoardHelper::dump() {
     for (const auto& bb : _board._pieces_bb)
         cout << "Piece " << setw(2) << bb.first << ": 0b" << bb.second << endl;
+    cout << "Dark squares : " << _board._dark_squares << endl;
+    cout << "Queen side   : " << _board._queen_side << endl;
+    cout << "King side    : " << _board._king_side << endl;
+    cout << "Center files : " << _board._center_files << endl;
+    cout << "Center       : " << _board._center << endl;
+    cout << "Flanks       : " << _board._flanks << endl;
+}
+
+static void pretty_print_bb(const Bitboard& botboard) {
+    cout << "╔═════════════════╗╮" << endl;
+
+    for (const auto& rank : boost::adaptors::reverse(AllRanks)) {
+        cout << "║ ";
+        for (const auto& file : AllFiles)
+            cout << (isset(botboard, make_square(file, rank)) ? "▓" : "░") << " ";
+        cout << "║" << rank << endl;
+    }
+    
+    cout << "╚═════════════════╝┊" << endl;
+    cout << "╰┈a┈b┈c┈d┈e┈f┈g┈h┈┈╯" << endl;
+}
+
+void BoardHelper::dump_pretty_print() {
+    for (const auto& bb : _board._pieces_bb) {
+        cout << "Piece " << setw(2) << bb.first << " :" << endl;
+        pretty_print_bb(bb.second);
+    }
+    cout << "Dark squares : " << endl;
+    pretty_print_bb(_board._dark_squares);
+    cout << "Queen side   : " << endl;
+    pretty_print_bb(_board._queen_side);
+    cout << "King side    : " << endl;
+    pretty_print_bb(_board._king_side);
+    cout << "Center files : " << endl;
+    pretty_print_bb(_board._center_files);
+    cout << "Center       : " << endl;
+    pretty_print_bb(_board._center);
+    cout << "Flanks       : " << endl;
+    pretty_print_bb(_board._flanks);
 }
 
 void BoardHelper::print() {

@@ -13,6 +13,12 @@ enum class Piece {
     BlackPawn, BlackKnight, BlackBishop, BlackRook, BlackQueen, BlackKing,
 };
 
+const std::array<Piece, 14> AllPieces = {
+    Piece::WhiteAll, Piece::BlackAll,
+    Piece::WhitePawn, Piece::WhiteKnight, Piece::WhiteBishop, Piece::WhiteRook, Piece::WhiteQueen, Piece::WhiteKing,
+    Piece::BlackPawn, Piece::BlackKnight, Piece::BlackBishop, Piece::BlackRook, Piece::BlackQueen, Piece::BlackKing,
+};
+
 enum class Square : int {
     A1, B1, C1, D1, E1, F1, G1, H1,
     A2, B2, C2, D2, E2, F2, G2, H2,
@@ -49,18 +55,6 @@ enum class Rank : int {
 
 const std::array<Rank, 8> AllRanks = {
     Rank::_1, Rank::_2, Rank::_3, Rank::_4, Rank::_5, Rank::_6, Rank::_7, Rank::_8,
-};
-
-enum Direction : int {
-    NORTH =  8,
-    EAST  =  1,
-    SOUTH = -NORTH,
-    WEST  = -EAST,
-
-    NORTH_EAST = NORTH + EAST,
-    SOUTH_EAST = SOUTH + EAST,
-    SOUTH_WEST = SOUTH + WEST,
-    NORTH_WEST = NORTH + WEST
 };
 
 #endif // _TYPES_HPP_

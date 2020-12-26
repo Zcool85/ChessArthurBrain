@@ -16,8 +16,10 @@ class BoardHelper {
     public:
         BoardHelper(Board& board);
         void init();
+        void reset();
         void print();
         void dump();
+        void dump_pretty_print();
         void setOptions(istringstream& is);
     private:
         Board& _board;
