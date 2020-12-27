@@ -10,6 +10,7 @@ const string CMD_QUIT = "quit";
 const string CMD_INIT = "init";
 const string CMD_RESET = "reset";
 const string CMD_SHOW = "show";
+const string CMD_PRETTY_PRINT = "pp";
 const string CMD_DUMP = "dump";
 const string CMD_DUMP_PRETTY_PRINT = "dumppp";
 const string CMD_SET  = "set";
@@ -20,6 +21,7 @@ void showHelp() {
     cerr << "init" << endl;
     cerr << "reset" << endl;
     cerr << "show" << endl;
+    cerr << "pp" << endl;
     cerr << "dump" << endl;
     cerr << "dumppp" << endl;
     cerr << "set ascii on/off" << endl;
@@ -48,7 +50,7 @@ void DebugEngineCLI::main(int argc, char* argv[]) {
 
         token.clear();
         is >> skipws >> token;
-        
+
         if (token.empty()) continue;
 
         if (token == CMD_QUIT) continue;
@@ -61,11 +63,13 @@ void DebugEngineCLI::main(int argc, char* argv[]) {
 
         if (token == CMD_SHOW) { _boardHelper.print(); continue; }
 
+        if (token == CMD_PRETTY_PRINT) { _boardHelper.pretty_print(is); continue; }
+
         if (token == CMD_DUMP) { _boardHelper.dump(); continue; }
 
         if (token == CMD_DUMP_PRETTY_PRINT) { _boardHelper.dump_pretty_print(); continue; }
 
-        if (token == CMD_SET) { _boardHelper.setOptions(is); continue; }
+        if (token == CMD_SET) { _boardHelper.set_options(is); continue; }
         
         cerr << "Unknow command \"" << token << "\"" << endl;
         cerr << "Type \"" << CMD_HELP << "\" for command list" << endl;

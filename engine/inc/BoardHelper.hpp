@@ -18,9 +18,10 @@ class BoardHelper {
         void init();
         void reset();
         void print();
+        void pretty_print(istringstream& is);
         void dump();
         void dump_pretty_print();
-        void setOptions(istringstream& is);
+        void set_options(istringstream& is);
     private:
         Board& _board;
         bool _showAscii;

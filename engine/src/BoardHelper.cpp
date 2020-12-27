@@ -79,7 +79,7 @@ void BoardHelper::reset() {
     _board.reset();
 }
 
-void BoardHelper::setOptions(istringstream& is) {
+void BoardHelper::set_options(istringstream& is) {
     // set ascii on/off
     // set square light/dark/off
     // set reverse true/false
@@ -136,6 +136,38 @@ static void pretty_print_bb(const Bitboard& botboard) {
     
     cout << "╚═════════════════╝┊" << endl;
     cout << "╰┈a┈b┈c┈d┈e┈f┈g┈h┈┈╯" << endl;
+}
+
+void BoardHelper::pretty_print(istringstream& is) {
+    // pp white_pieces
+    // pp black_pieces
+    // pp empty_squares
+    // pp occupied_squares
+    string bitboard;
+
+    is >> bitboard;
+
+    if (bitboard == "white_pieces") {
+        pretty_print_bb(_board.white_pieces());
+        return;
+    }
+
+    if (bitboard == "black_pieces") {
+        pretty_print_bb(_board.black_pieces());
+        return;
+    }
+
+    if (bitboard == "empty_squares") {
+        pretty_print_bb(_board.empty_squares());
+        return;
+    }
+
+    if (bitboard == "occupied_squares") {
+        pretty_print_bb(_board.occupied_squares());
+        return;
+    }
+
+    cerr << "No pretty print for \"" << bitboard << "\"" << endl;
 }
 
 void BoardHelper::dump_pretty_print() {

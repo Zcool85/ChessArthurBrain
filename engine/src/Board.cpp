@@ -68,4 +68,20 @@ void Board::init() noexcept {
     updateBlackAllBitdoard();
 }
 
+Bitboard const Board::white_pieces() const noexcept {
+    return _pieces_bb.at(Piece::WhiteAll);
+}
+
+Bitboard const Board::black_pieces() const noexcept {
+    return _pieces_bb.at(Piece::BlackAll);
+}
+
+Bitboard const Board::empty_squares() const noexcept {
+    return ~(_pieces_bb.at(Piece::BlackAll) | _pieces_bb.at(Piece::WhiteAll));
+}
+
+Bitboard const Board::occupied_squares() const noexcept {
+    return _pieces_bb.at(Piece::BlackAll) | _pieces_bb.at(Piece::WhiteAll);
+}
+
 // EOF
