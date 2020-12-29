@@ -10,6 +10,14 @@ Bitboard const MASK_CENTER_FILES = 0x3C3C3C3C3C3C3C3CULL;
 Bitboard const MASK_CENTER       = 0x0000001818000000ULL;
 Bitboard const MASK_FLANKS       = 0x8181818181818181ULL;
 
+#include "MaskRookAttacks.hpp"
+#include "MaskKnightAttacks.hpp"
+#include "MaskBeshopAttacks.hpp"
+#include "MaskQueenAttacks.hpp"
+#include "MaskKingAttacks.hpp"
+#include "MaskWhitePawnAttacks.hpp"
+#include "MaskBlackPawnAttacks.hpp"
+
 Board::Board() {
     for (const auto& piece : AllPieces)
         _pieces_bb[piece].reset();

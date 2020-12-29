@@ -12,13 +12,13 @@ extern Bitboard const MASK_CENTER_FILES;
 extern Bitboard const MASK_CENTER;
 extern Bitboard const MASK_FLANKS;
 
-// extern std::unordered_map<Square, Bitboard> const _attacks_rook_mask;        // Computed by X-ray
-// extern std::unordered_map<Square, Bitboard> const _attacks_knight_mask;
-// extern std::unordered_map<Square, Bitboard> const _attacks_beshop_mask;      // Computed by X-ray
-// extern std::unordered_map<Square, Bitboard> const _attacks_queen_mask;       // Computed by X-ray
-// extern std::unordered_map<Square, Bitboard> const _attacks_king_mask;
-// extern std::unordered_map<Square, Bitboard> const _attacks_white_pawn_mask;
-// extern std::unordered_map<Square, Bitboard> const _attacks_black_pawn_mask;
+extern std::unordered_map<const Square, const Bitboard> const MASK_ROOK_ATTACKS;        // Computed by X-ray
+extern std::unordered_map<const Square, const Bitboard> const MASK_KNIGHT_ATTACKS;
+extern std::unordered_map<const Square, const Bitboard> const MASK_BESHOP_ATTACKS;      // Computed by X-ray
+extern std::unordered_map<const Square, const Bitboard> const MASK_QUEEN_ATTACKS;       // Computed by X-ray
+extern std::unordered_map<const Square, const Bitboard> const MASK_KING_ATTACKS;
+extern std::unordered_map<const Square, const Bitboard> const MASK_WHITE_PAWN_ATTACKS;
+extern std::unordered_map<const Square, const Bitboard> const MASK_BLACK_PAWN_ATTACKS;
 
 class BoardHelper;
 

@@ -35,6 +35,13 @@ ostream& operator<<(ostream &o, Rank rank) {
     return o << static_cast<int>(rank) + 1;
 }
 
+ostream& operator<<(ostream &o, Square square) {
+    // A1, B1, C1, etc.
+    o << static_cast<char>('A' + (static_cast<int>(square) % 8));
+    o << static_cast<char>('1' + (static_cast<int>(square) / 8));
+    return o;
+}
+
 static unordered_map<Piece, string> const glyph_ascii_pieces = {
     {Piece::WhitePawn,   "P"},
     {Piece::WhiteKnight, "N"},
@@ -187,6 +194,35 @@ void BoardHelper::dump_pretty_print() {
     pretty_print_bb(MASK_CENTER);
     cout << "Flanks       : " << endl;
     pretty_print_bb(MASK_FLANKS);
+
+    // for (const auto& square : AllSquares) {
+    //     cout << "Rook attack from " << square << ":" << endl;
+    //     pretty_print_bb(MASK_ROOK_ATTACKS.at(square));
+    // }
+    // for (const auto& square : AllSquares) {
+    //     cout << "Knight attack from " << square << ":" << endl;
+    //     pretty_print_bb(MASK_KNIGHT_ATTACKS.at(square));
+    // }
+    // for (const auto& square : AllSquares) {
+    //     cout << "Beshop attack from " << square << ":" << endl;
+    //     pretty_print_bb(MASK_BESHOP_ATTACKS.at(square));
+    // }
+    // for (const auto& square : AllSquares) {
+    //     cout << "Queen attack from " << square << ":" << endl;
+    //     pretty_print_bb(MASK_QUEEN_ATTACKS.at(square));
+    // }
+    // for (const auto& square : AllSquares) {
+    //     cout << "King attack from " << square << ":" << endl;
+    //     pretty_print_bb(MASK_KING_ATTACKS.at(square));
+    // }
+    // for (const auto& square : AllSquares) {
+    //     cout << "White pawn attack from " << square << ":" << endl;
+    //     pretty_print_bb(MASK_WHITE_PAWN_ATTACKS.at(square));
+    // }
+    // for (const auto& square : AllSquares) {
+    //     cout << "Black pawn attack from " << square << ":" << endl;
+    //     pretty_print_bb(MASK_BLACK_PAWN_ATTACKS.at(square));
+    // }
 }
 
 void BoardHelper::print() {
