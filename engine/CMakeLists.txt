@@ -10,6 +10,7 @@ set(SRCS
         src/Board.cpp
         src/BoardHelper.cpp
         src/DebugEngineCLI.cpp
+        src/Uci.cpp
     )
 
 set(HEADERS
@@ -19,6 +20,11 @@ set(HEADERS
         inc/DebugEngineCLI.hpp
         inc/Unused.hpp
         inc/BitboardHelper.hpp
+        inc/Game.hpp
+        inc/Misc.hpp
+        inc/Move.hpp
+        inc/Position.hpp
+        inc/Uci.hpp
     )
 
 add_executable(ChessArthurEngine ${SRCS} ${HEADERS})

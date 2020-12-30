@@ -4,7 +4,8 @@ Chess Engine
 
 ## Inspiration
 
-[Inpiration source](https://www.chessprogramming.org/Main_Page)
+[Inpiration source](https://www.chessprogramming.org/Main_Page).
+[UCI Protocol](http://wbec-ridderkerk.nl/html/UCIProtocol.html).
 
 ## Project arborescence documentation
 
